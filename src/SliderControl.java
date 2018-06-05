@@ -6,13 +6,18 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
+import javafx.util.StringConverter;
 
 import java.net.URL;
+import java.text.DecimalFormat;
+import java.text.ParsePosition;
 import java.util.ResourceBundle;
 
 public class SliderControl implements Initializable, ChangeListener, MapChangeListener {
@@ -81,6 +86,28 @@ public class SliderControl implements Initializable, ChangeListener, MapChangeLi
 		previewColor.setFill(color);
 		previewGray.setFill(niveauDeGris(r,g,b));
 
+		valueBlue.setTextFormatter(new TextFormatter<>(change -> {
+			DecimalFormat format = new DecimalFormat( "#.0" );
+
+			if ( change.getControlNewText().isEmpty() )
+			{
+				return change;
+			}
+
+			ParsePosition parsePosition = new ParsePosition( 0 );
+			Object object = format.parse( change.getControlNewText(), parsePosition );
+
+			if ( object == null || parsePosition.getIndex() < change.getControlNewText().length() )
+			{
+				return null;
+			}
+			else
+			{
+				return change;
+			}
+
+		}));
+
 		valueRed.setText(String.valueOf(r.intValue()));
 		valueGreen.setText(String.valueOf(g.intValue()));
 		valueBlue.setText(String.valueOf(b.intValue()));
@@ -105,7 +132,11 @@ public class SliderControl implements Initializable, ChangeListener, MapChangeLi
 
 
 
+
+
 	}
+
+
 
 
 
@@ -118,6 +149,21 @@ public class SliderControl implements Initializable, ChangeListener, MapChangeLi
 			Color rectFill = hexaColor.getValue();
 
 			Rectangle cRect = new Rectangle(w, dcolor.getHeight(), rectFill);
+
+			cRect.setOnMouseClicked(e ->{
+				if(e.getButton().equals(MouseButton.PRIMARY)) {
+					System.out.println("click gauche");
+					Color c = (Color) ((Rectangle) e.getSource()).getFill();
+					red.setValue(c.getRed()*255);
+					green.setValue(c.getGreen()*255);
+					blue.setValue(c.getBlue()*255);
+
+				}
+				if(e.getButton().equals(MouseButton.SECONDARY))
+					System.out.println("click droit");
+
+
+			});
 			hBoxColors.getChildren().add(cRect);
 			rColors.add(cRect);
 
@@ -161,9 +207,14 @@ public class SliderControl implements Initializable, ChangeListener, MapChangeLi
 
 	public void changedTextField(javafx.event.ActionEvent actionEvent) {
 
-		 red.setValue(Double.valueOf(valueRed.getText()));
-		 green.setValue(Double.valueOf(valueGreen.getText()));
-		 blue.setValue(Double.valueOf(valueBlue.getText()));
+			try{
+				red.setValue(Double.valueOf(valueRed.getText()));
+				green.setValue(Double.valueOf(valueGreen.getText()));
+				blue.setValue(Double.valueOf(valueBlue.getText()));
+			}catch(NumberFormatException e){
+				//e.printStackTrace();
+			}
+
 
 	}
 }
