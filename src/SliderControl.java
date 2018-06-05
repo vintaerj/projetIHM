@@ -3,6 +3,7 @@ import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.MapChangeListener;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
@@ -216,5 +217,14 @@ public class SliderControl implements Initializable, ChangeListener, MapChangeLi
 			}
 
 
+	}
+
+
+	@FXML
+	void updateColor(ActionEvent event) {
+		Color c = hexaColor.getValue();
+		red.setValue(c.getRed()*255);
+		green.setValue(c.getGreen()*255);
+		blue.setValue(c.getBlue()*255);
 	}
 }

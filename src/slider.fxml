@@ -74,7 +74,7 @@
                            <children>
                               <AnchorPane prefHeight="92.0" prefWidth="192.0" AnchorPane.rightAnchor="0.0">
                                  <children>
-                                    <ColorPicker fx:id="hexaColor" prefHeight="36.0" prefWidth="255.0" AnchorPane.leftAnchor="0.0">
+                                    <ColorPicker fx:id="hexaColor" onAction="#updateColor" prefHeight="36.0" prefWidth="255.0" AnchorPane.leftAnchor="0.0">
                                        <value>
                                           <Color blue="1.0" green="0.0" red="0.0" />
                                        </value>
