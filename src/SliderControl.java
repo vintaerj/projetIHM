@@ -141,7 +141,7 @@ public class SliderControl implements Initializable, ChangeListener, MapChangeLi
 
 	@FXML
 	void cliked(MouseEvent event) {
-		if(rColors.size() < NB_COLORS || !isColorAlreadyExist(hexaColor.getValue())) {
+		if(rColors.size() < NB_COLORS && !isColorAlreadyExist(hexaColor.getValue())) {
 			//System.out.println("add "+ hexaColor.getValue());
 			Double w = dcolor.getWidth() / (rColors.size() + 1);
 
@@ -176,10 +176,16 @@ public class SliderControl implements Initializable, ChangeListener, MapChangeLi
 				rGrays.get(i).setWidth(w);
 			}
 			colors.add(hexaColor.getValue());
-		}else{
+		}else if(colors.size() >= 10){
 			Alert alert = new Alert(Alert.AlertType.ERROR);
 			alert.setTitle("ERREUR");
 			alert.setHeaderText("pas plus de "+NB_COLORS);
+
+			alert.showAndWait();
+		}else{
+			Alert alert = new Alert(Alert.AlertType.ERROR);
+			alert.setTitle("ERREUR");
+			alert.setHeaderText("Couleur déjà présente");
 
 			alert.showAndWait();
 		}
