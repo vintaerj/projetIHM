@@ -9,7 +9,7 @@
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.layout.BorderPane?>
 
-<BorderPane fx:id="root" prefHeight="588.0" prefWidth="600.0" stylesheets="@Slider.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane fx:id="root" prefHeight="537.0" prefWidth="600.0" stylesheets="@Slider.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
    <bottom>
       <GridPane prefHeight="30.0" prefWidth="265.0" BorderPane.alignment="CENTER">
         <columnConstraints>
@@ -36,11 +36,4 @@
          </BorderPane.margin>
       </GridPane>
    </bottom>
-   <top>
-      <AnchorPane prefHeight="31.0" prefWidth="600.0" BorderPane.alignment="CENTER">
-         <children>
-            <Label layoutX="282.0" layoutY="10.0" text="Test" />
-         </children>
-      </AnchorPane>
-   </top>
 </BorderPane>
