@@ -20,6 +20,7 @@ public class SliderApp extends Application {
 	@Override
 	public void start(Stage primaryStage) {
 		this.primaryStage = primaryStage;
+		this.primaryStage.setResizable(false);
 		this.primaryStage.setTitle("RGB2MC");
 
 		this.primaryStage.getIcons().add(new Image("file:resources/images/RGB2MC.png"));
@@ -32,10 +33,10 @@ public class SliderApp extends Application {
 		try {
 			FXMLLoader loader = new FXMLLoader();
 			loader.setLocation(getClass().getResource("slider.fxml"));
-			AnchorPane personOverview = loader.load();
+			AnchorPane RGB2MC = loader.load();
 
 
-			rootLayout.setCenter(personOverview);
+			rootLayout.setCenter(RGB2MC);
 
 			SliderControl controller = loader.getController();
 			controller.setMainApp(this);

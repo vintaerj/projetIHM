@@ -10,6 +10,7 @@ import javafx.scene.control.*;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
@@ -23,6 +24,12 @@ import java.util.ResourceBundle;
 
 public class SliderControl implements Initializable, ChangeListener, MapChangeListener {
 	private static final int NB_COLORS = 10;
+
+	@FXML
+	private BorderPane root;
+
+	@FXML
+	private Label message;
 
 	@FXML
 	private AnchorPane background;
@@ -120,7 +127,6 @@ public class SliderControl implements Initializable, ChangeListener, MapChangeLi
 	}
 
 
-
 	@Override
 	public void initialize(URL url, ResourceBundle resourceBundle) {
 		red.valueProperty().addListener(this);
@@ -131,15 +137,7 @@ public class SliderControl implements Initializable, ChangeListener, MapChangeLi
 		valueGreen.onActionProperty().addListener(this);
 		valueBlue.onActionProperty().addListener(this);
 
-
-
-
-
 	}
-
-
-
-
 
 	@FXML
 	void cliked(MouseEvent event) {
@@ -153,16 +151,16 @@ public class SliderControl implements Initializable, ChangeListener, MapChangeLi
 
 			cRect.setOnMouseClicked(e ->{
 				if(e.getButton().equals(MouseButton.PRIMARY)) {
-					System.out.println("click gauche");
+					message.setText("éditer cette couleur");
 					Color c = (Color) ((Rectangle) e.getSource()).getFill();
 					red.setValue(c.getRed()*255);
 					green.setValue(c.getGreen()*255);
 					blue.setValue(c.getBlue()*255);
 
 				}
-				if(e.getButton().equals(MouseButton.SECONDARY))
-					System.out.println("click droit");
-
+				if(e.getButton().equals(MouseButton.SECONDARY)) {
+					message.setText("supprimer la couleur");
+				}
 
 			});
 			hBoxColors.getChildren().add(cRect);
@@ -178,7 +176,6 @@ public class SliderControl implements Initializable, ChangeListener, MapChangeLi
 				rGrays.get(i).setWidth(w);
 			}
 		}else{
-			// Show the error message.
 			Alert alert = new Alert(Alert.AlertType.ERROR);
 			alert.setTitle("ERREUR");
 			alert.setHeaderText("pas plus de "+NB_COLORS);
