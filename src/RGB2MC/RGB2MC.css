@@ -114,12 +114,12 @@
     -fx-background-color: #c6c6c6;
     -fx-background-insets: 0;
     -fx-background-radius: 0;
-    -fx-padding: 0.333333em; /* This value must be equal to ".slider .thumb" padding */
+    -fx-padding: 0.333333em;
 }
 
 .slider .fill {
     -fx-background-color: #00828b;
-    -fx-padding: 0.333333em; /* This value must be equal to ".slider .thumb" padding */
+    -fx-padding: 0.333333em;
 }
 
 .slider .fill:hover {
@@ -158,31 +158,6 @@
 }
 
 
-.text-input > .right-button{
-    -fx-cursor: default;
-
-    -fx-background-insets: -0.1666665em -0.45em -0.1666665em -0.45em;
-}
-
-.text-field > .right-button > .right-button-graphic {
-    -fx-shape            : "M221.738,305.873l6.135,6.16l-2.875,2.863l-6.135-6.159l-6.263,6.237l-2.864-2.875l6.263-6.238l-6.177-6.202l2.875-2.863l6.177,6.201l6.244-6.22l2.864,2.876L221.738,305.873z";
-
-    -fx-padding: 0.5em 0.5em;
-    -fx-background-color: black;
-}
-
-.text-input > .right-button:hover {
-    -fx-background-color: #d9d9d9;
-}
-
-.text-input > .right-button:pressed {
-    -fx-background-color: black;
-}
-
-.text-input > .right-button:pressed > .right-button-graphic {
-    -fx-background-color: white;
-}
-
 .text-input:disabled
 {
     -fx-opacity: 1;
@@ -193,7 +168,6 @@
 .item-title.disabled{
     -fx-text-fill: #adadad;
 }
-
 
 
 
