@@ -118,7 +118,8 @@ nbdist/
 nbactions.xml
 .nb-gradle/
 
-.idea
+.idea/*
+tmp/*
 ### Java ###
 *.class
 

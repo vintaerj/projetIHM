@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane prefHeight="407.0" prefWidth="590.0" styleClass="background" stylesheets="@RGB2MC.css" xmlns="http://javafx.com/javafx/9" xmlns:fx="http://javafx.com/fxml/1" fx:controller="RGB2MC.ExportController">
+   <children>
+      <AnchorPane prefHeight="56.0" prefWidth="590.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+      <AnchorPane fx:id="zoneText" layoutX="10.0" layoutY="62.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="62.0" />
+   </children>
+</AnchorPane>
