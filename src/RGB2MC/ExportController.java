@@ -1,6 +1,5 @@
 package RGB2MC;
 
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
@@ -18,13 +17,7 @@ public class ExportController  {
 
 
 	@FXML
-	private Label exportHeader;
-
-
-
-	@FXML
 	private void initialize() {
-		exportHeader.getStyleClass().add("label-header");
 	}
 
 
@@ -51,7 +44,6 @@ public class ExportController  {
 		gridPane.add(couleurRgb, 2, 0);
 		gridPane.add(couleurHsl, 3, 0);
 
-		ObservableList<MyColorData> listColors = FXCollections.observableArrayList();
 		int row = 1;
 		for(MyColorData myColorData: myColorDatas){
 			Label id = new Label(myColorData.getNameColor().toUpperCase()); id.setStyle("-fx-background-color: "+myColorData.getRgbColor()+";");

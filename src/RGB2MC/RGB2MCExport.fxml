@@ -7,7 +7,7 @@
    <children>
       <AnchorPane prefHeight="56.0" prefWidth="590.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <Label layoutX="207.0" layoutY="16.0" styleClass="column-header" text="Liste des couleurs" />
+            <Label fx:id="exportHeader" layoutX="14.0" layoutY="16.0" styleClass="label-header" text="Liste de vos couleurs" />
          </children></AnchorPane>
       <AnchorPane fx:id="zoneTableau" layoutX="10.0" layoutY="62.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="62.0" />
    </children>

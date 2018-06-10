@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/slider.iml" filepath="$PROJECT_DIR$/slider.iml" />
+      <module fileurl="file://$PROJECT_DIR$/RGB2MC.iml" filepath="$PROJECT_DIR$/RGB2MC.iml" />
     </modules>
   </component>
 </project>
