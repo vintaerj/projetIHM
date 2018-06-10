@@ -1,12 +1,10 @@
 package RGB2MC;
 
 import javafx.collections.FXCollections;
-import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
@@ -61,6 +59,7 @@ public class ExportController {
 		this.saveColors = saveColors;
 		colorData = getColorList();
 		colorTable.setItems(colorData);
+		System.out.println(colorTable.getItems());
 	}
 
 }

@@ -1,20 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 
+<?import javafx.scene.control.cell.PropertyValueFactory?>
 <AnchorPane prefHeight="407.0" prefWidth="590.0" styleClass="background" stylesheets="@RGB2MC.css" xmlns="http://javafx.com/javafx/9" xmlns:fx="http://javafx.com/fxml/1" fx:controller="RGB2MC.ExportController">
    <children>
-      <AnchorPane prefHeight="56.0" prefWidth="590.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+      <AnchorPane prefHeight="56.0" prefWidth="590.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <Label layoutX="207.0" layoutY="16.0" styleClass="header" text="Liste des couleurs" />
+         </children></AnchorPane>
       <AnchorPane fx:id="zoneTableau" layoutX="10.0" layoutY="62.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="62.0">
          <children>
             <TableView fx:id="colorTable" prefHeight="335.0" prefWidth="570.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
               <columns>
-                <TableColumn fx:id="nameColor" prefWidth="125.0" text="Couleur" />
-                <TableColumn fx:id="webColor" minWidth="0.0" prefWidth="118.0" text="Web" />
-                  <TableColumn fx:id="rgbColor" minWidth="0.0" prefWidth="164.0" text="RGB" />
-                  <TableColumn fx:id="tslColor" minWidth="0.0" prefWidth="162.0" text="HSL" />
+               <TableColumn fx:id="nameColor" prefWidth="125.0" text="Couleur">
+                  <cellValueFactory><PropertyValueFactory property= "Couleur"/></cellValueFactory>
+               </TableColumn>
+               <TableColumn fx:id="webColor" minWidth="0.0" prefWidth="118.0" text="Web">
+                  <cellValueFactory><PropertyValueFactory property= "Web"/></cellValueFactory>
+               </TableColumn>
+               <TableColumn fx:id="rgbColor" minWidth="0.0" prefWidth="164.0" text="RGB">
+                  <cellValueFactory><PropertyValueFactory property= "RGB"/></cellValueFactory>
+               </TableColumn>
+               <TableColumn fx:id="tslColor" minWidth="0.0" prefWidth="162.0" text="HSL">
+                  <cellValueFactory><PropertyValueFactory property= "HSL"/></cellValueFactory>
+               </TableColumn>
               </columns>
             </TableView>
          </children></AnchorPane>
