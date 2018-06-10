@@ -19,10 +19,14 @@ public class ConverterColor {
 	}
 
 	public static String color2tsl(Color color){
+		Double h = color.getHue();
+		Double s = color.getSaturation()*100;
+		Double l = color.getBrightness()*100;
+
 		return "("
-				+ (color.getHue()) + "°, "
-				+ color.getSaturation()*100 + "%, "
-				+ color.getBrightness()*100 + "%"
+				+ h.intValue() + "°, "
+				+ s.intValue() + "%, "
+				+ l.intValue() + "%"
 				+ ")";
 	}
 	public static Color rgb2gray(Color value) {
