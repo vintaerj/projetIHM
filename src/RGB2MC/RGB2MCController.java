@@ -20,12 +20,15 @@ import java.util.*;
 
 public class RGB2MCController implements Initializable, ChangeListener, ListChangeListener {
 	private static final int NB_COLORS_MAX = 10;
+	private static final double DELTA = 5.0;
 
 	private RGB2MCApp mainApp;
 
 	private ObservableList<Rectangle> listOfColors = FXCollections.observableArrayList();
 	private ObservableList<Rectangle> listOfGray = FXCollections.observableArrayList();
-	private ObservableList<Color> saveColors = FXCollections.observableArrayList();
+	private ObservableList<MyColorData> saveColors = FXCollections.observableArrayList();
+
+	private ObservableList<Color> verification = FXCollections.observableArrayList();
 
 
 	@FXML
@@ -81,7 +84,7 @@ public class RGB2MCController implements Initializable, ChangeListener, ListChan
 	void addNewColorFromEdit(ActionEvent event) {
 		if(listOfColors.size() < NB_COLORS_MAX && ! isColorAlreadyExist(colorPicker.getValue())) {
 			Color colorFill = colorPicker.getValue();
-			if(!isColorAlreadyExist(ConverterColor.rgb2gray(colorFill))) {
+			if(!isColorAlreadyExist(ConverterColor.rgb2gray(colorFill)) && !isColorNearToColorAlreadyExist(colorFill)) {
 				int nbRectAfterAdd = listOfColors.size() + 1;
 				Rectangle rect;
 
@@ -93,10 +96,11 @@ public class RGB2MCController implements Initializable, ChangeListener, ListChan
 				viewGray.getChildren().add(rect);
 				listOfGray.add(rect);
 
-				saveColors.add(colorFill);
-			}else{
+				verification.add(colorFill);
+				saveColors.add(new MyColorData(colorFill.toString(), ConverterColor.color2Hex(colorFill), ConverterColor.color2rgb(colorFill), ConverterColor.color2tsl(colorFill)));
+			}else if(isColorAlreadyExist(ConverterColor.rgb2gray(colorFill))) {
 				showAlert("Une couleur ayant déjà le même niveau de gris existe !");
-			}
+			}else showAlert("Une couleur avec un niveau de gris assez proche existe!");
 		}else{
 			String msg = (listOfColors.size() >= NB_COLORS_MAX) ? "Nombre maximale de couleur atteint": "Cette couleur est déjà présente.";
 			showAlert(msg);
@@ -109,6 +113,7 @@ public class RGB2MCController implements Initializable, ChangeListener, ListChan
 		if(listOfColors.size() > 0 ){
 			listOfColors.remove(listOfColors.size()-1);
 			listOfGray.remove(listOfGray.size()-1);
+			verification.remove(saveColors.size()-1);
 			saveColors.remove(saveColors.size()-1);
 		}else{
 			showAlert("Il n'y a aucune couleur à supprimer");
@@ -136,7 +141,7 @@ public class RGB2MCController implements Initializable, ChangeListener, ListChan
 
 	@FXML
 	void exportColor(ActionEvent event) {
-		if (saveColors.size() > 0) {
+		if (verification.size() > 0) {
 			mainApp.showExportDialog(saveColors);
 		} else {
 			showAlert("Il n'y a rien à exporter");
@@ -246,7 +251,21 @@ public class RGB2MCController implements Initializable, ChangeListener, ListChan
 	}
 
 	private boolean isColorAlreadyExist(Color color) {
-		return saveColors.contains(color);
+		return verification.contains(color);
+	}
+
+	private boolean isColorNearToColorAlreadyExist(Color color){
+		if(verification.size() == 0) return false;
+		Double gray = ConverterColor.gray(color);
+
+		for(Color c: verification){
+			Double tmpGray = ConverterColor.gray(c);
+			System.out.println(Math.abs(gray - tmpGray));
+			if(Math.abs(gray-tmpGray) <= DELTA){
+				return true;
+			}
+		}
+		return false;
 	}
 
 	public void setMainApp(RGB2MCApp mainApp) {

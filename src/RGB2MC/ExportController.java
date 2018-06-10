@@ -1,56 +1,28 @@
 package RGB2MC;
 
 import javafx.collections.FXCollections;
-import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.geometry.Insets;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.paint.Color;
+import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
-public class ExportController implements ListChangeListener {
+public class ExportController  {
+	private ObservableList<MyColorData> myColorDatas;
 	private Stage exportStage;
 
 	@FXML
 	private AnchorPane zoneTableau;
 
-	@FXML
-	private TableView<MyColorData> colorTable;
 
-	@FXML
-	private TableColumn<MyColorData, String> nameColor;
+	private RGB2MCApp mainApp;
 
-	@FXML
-	private TableColumn<MyColorData, String> webColor;
-
-	@FXML
-	private TableColumn<MyColorData, String> rgbColor;
-
-	@FXML
-	private TableColumn<MyColorData, String> tslColor;
-
-	private ObservableList<MyColorData> colorData = FXCollections.observableArrayList();
-	private ObservableList<Color> saveColors = FXCollections.observableArrayList();
-
-
-	public ExportController() {
-	}
 
 	@FXML
 	private void initialize() {
-		colorData.addListener(this);
-	}
-
-	private ObservableList<MyColorData> getColorList() {
-		ObservableList<MyColorData> listColors = FXCollections.observableArrayList();
-		for(Color color: saveColors){
-			MyColorData listColor = new MyColorData("      ", ConverterColor.color2Hex(color), ConverterColor.color2rgb(color), ConverterColor.color2tsl(color));
-			listColors.add(listColor);
-		}
-		System.out.println(listColors);
-		return listColors;
 	}
 
 
@@ -58,16 +30,41 @@ public class ExportController implements ListChangeListener {
 		this.exportStage = exportStage;
 	}
 
-	public void setColorData(ObservableList<Color> saveColors) {
-		this.saveColors = saveColors;
-		this.colorData = getColorList();
-		colorTable.getItems().addAll(colorData);
-		System.out.println(colorTable.getItems());
-	}
+	public void setColorData(ObservableList<MyColorData> myColorDatas) {
+		this.myColorDatas = myColorDatas;
 
-	@Override
-	public void onChanged(Change change) {
-		colorTable.getItems().addAll(colorData);
+		GridPane gridPane = new GridPane();
+		gridPane.setPadding(new Insets(20));
+		gridPane.setHgap(25);
+		gridPane.setVgap(15);
 
+		// firt row = header
+		Label couleurId = new Label("Couleur ID"); couleurId.setStyle("");
+		Label couleurWeb = new Label("WEB");  couleurWeb.setStyle("");
+		Label couleurRgb = new Label("RGB");  couleurRgb.setStyle("");
+		Label couleurHsl = new Label("HSL/TSL");  couleurHsl.setStyle("");
+
+		// Fill row 0
+		gridPane.add(couleurId, 0, 0);
+		gridPane.add(couleurWeb, 1, 0);
+		gridPane.add(couleurRgb, 2, 0);
+		gridPane.add(couleurHsl, 3, 0);
+
+		ObservableList<MyColorData> listColors = FXCollections.observableArrayList();
+		int row = 1;
+		for(MyColorData myColorData: myColorDatas){
+			listColors.add(myColorData);
+			Label id = new Label(myColorData.getNameColor());
+			TextField web = new TextField(myColorData.getWebColor()); web.setEditable(false);
+			TextField rgb = new TextField(myColorData.getRgbColor()); rgb.setEditable(false);
+			TextField hsl = new TextField(myColorData.getTslColor()); hsl.setEditable(false);
+			gridPane.add(id, 0, row);
+			gridPane.add(web, 1, row);
+			gridPane.add(rgb, 2, row);
+			gridPane.add(hsl, 3, row);
+			row++;
+		}
+		System.out.println(listColors);
+		zoneTableau.getChildren().addAll(gridPane);
 	}
 }

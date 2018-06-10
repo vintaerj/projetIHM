@@ -33,4 +33,8 @@ public class ConverterColor {
 		//NiveauGris = 0.3   Rouge + 0.59   Vert + 0.11   Bleu
 		return Color.grayRgb((int)(0.3*r + 0.59*g + 0.11*b));
 	}
+
+	public static Double gray(Color color){
+		return (0.3*color.getRed()*255) + (0.59*color.getGreen()*255) + (0.11*color.getBlue()*255);
+	}
 }

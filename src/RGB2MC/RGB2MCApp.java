@@ -1,6 +1,7 @@
 package RGB2MC;
 
 import javafx.application.Application;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -17,6 +18,11 @@ public class RGB2MCApp extends Application {
 
 	private Stage primaryStage;
 	private Parent rootLayout;
+	private ObservableList<MyColorData> colorData = FXCollections.observableArrayList();
+
+	public RGB2MCApp() {
+		colorData.add(new MyColorData(Color.rgb(0,0,0).toString(), "#000000", "(0,0,0)","(0°, 0%, 0%)"));
+	}
 
 	public static void main(String[] args) {
 		launch(args);
@@ -46,13 +52,14 @@ public class RGB2MCApp extends Application {
 
 			RGB2MCController controller = loader.getController();
 			controller.setMainApp(this);
+
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
 
 
-	public void showExportDialog(ObservableList<Color> saveColors) {
+	public void showExportDialog(ObservableList<MyColorData> myColorDatas) {
 		try {
 			FXMLLoader loader = new FXMLLoader();
 			loader.setLocation(getClass().getResource("/RGB2MC/RGB2MCExport.fxml"));
@@ -68,10 +75,16 @@ public class RGB2MCApp extends Application {
 
 			ExportController controller = loader.getController();
 			controller.setDialogStage(exportStage);
-			controller.setColorData(saveColors);
+			controller.setColorData(myColorDatas);
 			exportStage.showAndWait();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+
+
+
+	public ObservableList<MyColorData> getColorData() {
+		return colorData;
 	}
 }
