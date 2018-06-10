@@ -21,7 +21,7 @@ public class ExportController {
 	private TableView<MyColorData> colorTable;
 
 	@FXML
-	private TableColumn<MyColorData, String> nameCOlor;
+	private TableColumn<MyColorData, String> nameColor;
 
 	@FXML
 	private TableColumn<MyColorData, String> webColor;
@@ -40,10 +40,6 @@ public class ExportController {
 
 	@FXML
 	private void initialize() {
-		nameCOlor.setCellValueFactory(new PropertyValueFactory<>("Couleur"));
-		webColor.setCellValueFactory(new PropertyValueFactory<>("WEB"));
-		rgbColor.setCellValueFactory(new PropertyValueFactory<>("RGB"));
-		tslColor.setCellValueFactory(new PropertyValueFactory<>("HSL/TSL"));
 	}
 
 	private ObservableList<MyColorData> getColorList() {
@@ -66,4 +62,5 @@ public class ExportController {
 		colorData = getColorList();
 		colorTable.setItems(colorData);
 	}
+
 }

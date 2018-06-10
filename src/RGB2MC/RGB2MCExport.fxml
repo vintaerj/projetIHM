@@ -11,7 +11,7 @@
          <children>
             <TableView fx:id="colorTable" prefHeight="335.0" prefWidth="570.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
               <columns>
-                <TableColumn fx:id="nameCOlor" prefWidth="125.0" text="Couleur" />
+                <TableColumn fx:id="nameColor" prefWidth="125.0" text="Couleur" />
                 <TableColumn fx:id="webColor" minWidth="0.0" prefWidth="118.0" text="Web" />
                   <TableColumn fx:id="rgbColor" minWidth="0.0" prefWidth="164.0" text="RGB" />
                   <TableColumn fx:id="tslColor" minWidth="0.0" prefWidth="162.0" text="HSL" />

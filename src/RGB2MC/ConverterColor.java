@@ -19,40 +19,10 @@ public class ConverterColor {
 	}
 
 	public static String color2tsl(Color color){
-		Double r = color.getRed();
-		Double g = color.getGreen();
-		Double b = color.getBlue();
-
-		Double cmax = Math.max(Math.max(r,g),b);
-		Double cmin = Math.min(Math.min(r,g),b);
-
-		Double delta = cmax - cmin;
-
-		Double t = 0.0;
-		Double s = 0.0;
-
-		Double l = (cmax + cmin)/2;
-
-		if(delta == 0){
-			s = 0.0;
-			t = 0.0;
-		}
-		else{
-			s = delta/(1-Math.abs(2*l-1));
-		}
-
-		if(cmax == r){
-			t = 60*(((g-b)/delta)%6);
-		}else if(cmax == g){
-			t = 60*(((b-r)/delta)+2);
-		}else if(cmax == b){
-			t = 60*(((r-g)/delta)+4);
-		}
-
 		return "("
-				+ t.intValue() + "°, "
-				+ (s*100) + "%, "
-				+ (l*100) + "%"
+				+ (color.getHue()) + "°, "
+				+ color.getSaturation()*100 + "%, "
+				+ color.getBrightness()*100 + "%"
 				+ ")";
 	}
 	public static Color rgb2gray(Color value) {
