@@ -1,6 +1,7 @@
 package RGB2MC;
 
 import javafx.collections.FXCollections;
+import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
@@ -9,7 +10,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
-public class ExportController {
+public class ExportController implements ListChangeListener {
 	private Stage exportStage;
 
 	@FXML
@@ -29,8 +30,9 @@ public class ExportController {
 
 	@FXML
 	private TableColumn<MyColorData, String> tslColor;
-	private ObservableList<MyColorData> colorData;
-	private ObservableList<Color> saveColors;
+
+	private ObservableList<MyColorData> colorData = FXCollections.observableArrayList();
+	private ObservableList<Color> saveColors = FXCollections.observableArrayList();
 
 
 	public ExportController() {
@@ -38,6 +40,7 @@ public class ExportController {
 
 	@FXML
 	private void initialize() {
+		colorData.addListener(this);
 	}
 
 	private ObservableList<MyColorData> getColorList() {
@@ -57,9 +60,14 @@ public class ExportController {
 
 	public void setColorData(ObservableList<Color> saveColors) {
 		this.saveColors = saveColors;
-		colorData = getColorList();
-		colorTable.setItems(colorData);
+		this.colorData = getColorList();
+		colorTable.getItems().addAll(colorData);
 		System.out.println(colorTable.getItems());
 	}
 
+	@Override
+	public void onChanged(Change change) {
+		colorTable.getItems().addAll(colorData);
+
+	}
 }
