@@ -54,7 +54,7 @@ public class ExportController  {
 		int row = 1;
 		for(MyColorData myColorData: myColorDatas){
 			listColors.add(myColorData);
-			Label id = new Label(myColorData.getNameColor());
+			Label id = new Label(myColorData.getNameColor()); id.setStyle("-fx-background-color: "+myColorData.getRgbColor()+";");
 			TextField web = new TextField(myColorData.getWebColor()); web.setEditable(false);
 			TextField rgb = new TextField(myColorData.getRgbColor()); rgb.setEditable(false);
 			TextField hsl = new TextField(myColorData.getTslColor()); hsl.setEditable(false);
