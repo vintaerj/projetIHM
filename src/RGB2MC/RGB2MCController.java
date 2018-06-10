@@ -260,7 +260,6 @@ public class RGB2MCController implements Initializable, ChangeListener, ListChan
 
 		for(Color c: verification){
 			Double tmpGray = ConverterColor.gray(c);
-			System.out.println(Math.abs(gray - tmpGray));
 			if(Math.abs(gray-tmpGray) <= DELTA){
 				return true;
 			}

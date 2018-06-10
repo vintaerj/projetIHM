@@ -11,18 +11,20 @@ import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
 public class ExportController  {
-	private ObservableList<MyColorData> myColorDatas;
 	private Stage exportStage;
 
 	@FXML
 	private AnchorPane zoneTableau;
 
 
-	private RGB2MCApp mainApp;
+	@FXML
+	private Label exportHeader;
+
 
 
 	@FXML
 	private void initialize() {
+		exportHeader.getStyleClass().add("label-header");
 	}
 
 
@@ -31,7 +33,6 @@ public class ExportController  {
 	}
 
 	public void setColorData(ObservableList<MyColorData> myColorDatas) {
-		this.myColorDatas = myColorDatas;
 
 		GridPane gridPane = new GridPane();
 		gridPane.setPadding(new Insets(20));
@@ -39,10 +40,10 @@ public class ExportController  {
 		gridPane.setVgap(15);
 
 		// firt row = header
-		Label couleurId = new Label("Couleur ID"); couleurId.setStyle("");
-		Label couleurWeb = new Label("WEB");  couleurWeb.setStyle("");
-		Label couleurRgb = new Label("RGB");  couleurRgb.setStyle("");
-		Label couleurHsl = new Label("HSL/TSL");  couleurHsl.setStyle("");
+		Label couleurId = new Label("Couleur ID"); couleurId.getStyleClass().add("label-header");
+		Label couleurWeb = new Label("WEB");  couleurWeb.getStyleClass().add("label-header");;
+		Label couleurRgb = new Label("RGB");  couleurRgb.getStyleClass().add("label-header");;
+		Label couleurHsl = new Label("HSL/TSL");  couleurHsl.getStyleClass().add("label-header");;
 
 		// Fill row 0
 		gridPane.add(couleurId, 0, 0);
@@ -53,8 +54,7 @@ public class ExportController  {
 		ObservableList<MyColorData> listColors = FXCollections.observableArrayList();
 		int row = 1;
 		for(MyColorData myColorData: myColorDatas){
-			listColors.add(myColorData);
-			Label id = new Label(myColorData.getNameColor()); id.setStyle("-fx-background-color: "+myColorData.getRgbColor()+";");
+			Label id = new Label(myColorData.getNameColor().toUpperCase()); id.setStyle("-fx-background-color: "+myColorData.getRgbColor()+";");
 			TextField web = new TextField(myColorData.getWebColor()); web.setEditable(false);
 			TextField rgb = new TextField(myColorData.getRgbColor()); rgb.setEditable(false);
 			TextField hsl = new TextField(myColorData.getTslColor()); hsl.setEditable(false);
@@ -64,7 +64,6 @@ public class ExportController  {
 			gridPane.add(hsl, 3, row);
 			row++;
 		}
-		System.out.println(listColors);
 		zoneTableau.getChildren().addAll(gridPane);
 	}
 }

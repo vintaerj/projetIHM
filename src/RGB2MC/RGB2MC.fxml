@@ -14,7 +14,7 @@
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.shape.Rectangle?>
 
-<AnchorPane fx:id="racine" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="520.0" prefWidth="700.0" stylesheets="@RGB2MC.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="RGB2MC.RGB2MCController">
+<AnchorPane fx:id="racine" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="520.0" prefWidth="700.0" stylesheets="@RGB2MC.css" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="RGB2MC.RGB2MCController">
    <children>
       <AnchorPane prefHeight="130.0" prefWidth="700.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -62,7 +62,7 @@
                               <Color blue="0.0" green="0.0" red="1.0" />
                            </value>
                         </ColorPicker>
-                        <HBox layoutX="23.0" layoutY="47.0" prefHeight="62.0" prefWidth="172.0" AnchorPane.bottomAnchor="21.0" AnchorPane.leftAnchor="23.0" AnchorPane.rightAnchor="23.0" AnchorPane.topAnchor="47.0">
+                        <HBox layoutX="32.0" layoutY="54.0" prefHeight="62.0" prefWidth="172.0" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="32.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="54.0">
                            <children>
                               <Rectangle fx:id="previewColor" arcHeight="5.0" arcWidth="5.0" fill="RED" height="60.0" layoutX="10.0" layoutY="10.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="86.0" />
                               <Rectangle fx:id="previewGray" arcHeight="5.0" arcWidth="5.0" fill="#4c4c4c" height="60.0" layoutX="10.0" layoutY="10.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="86.0" />

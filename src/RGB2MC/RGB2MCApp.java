@@ -59,7 +59,7 @@ public class RGB2MCApp extends Application {
 	}
 
 
-	public void showExportDialog(ObservableList<MyColorData> myColorDatas) {
+	void showExportDialog(ObservableList<MyColorData> myColorDatas) {
 		try {
 			FXMLLoader loader = new FXMLLoader();
 			loader.setLocation(getClass().getResource("/RGB2MC/RGB2MCExport.fxml"));
