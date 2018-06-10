@@ -1,59 +1,69 @@
 package RGB2MC;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.TextArea;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 public class ExportController {
-	private final String HR = "============================================\n";
-	private final String BR = "\n\n";
 	private Stage exportStage;
 
 	@FXML
-	private AnchorPane zoneText;
+	private AnchorPane zoneTableau;
+
+	@FXML
+	private TableView<MyColorData> colorTable;
+
+	@FXML
+	private TableColumn<MyColorData, String> nameCOlor;
+
+	@FXML
+	private TableColumn<MyColorData, String> webColor;
+
+	@FXML
+	private TableColumn<MyColorData, String> rgbColor;
+
+	@FXML
+	private TableColumn<MyColorData, String> tslColor;
+	private ObservableList<MyColorData> colorData;
+	private ObservableList<Color> saveColors;
+
+
+	public ExportController() {
+	}
 
 	@FXML
 	private void initialize() {
+		nameCOlor.setCellValueFactory(new PropertyValueFactory<>("Couleur"));
+		webColor.setCellValueFactory(new PropertyValueFactory<>("WEB"));
+		rgbColor.setCellValueFactory(new PropertyValueFactory<>("RGB"));
+		tslColor.setCellValueFactory(new PropertyValueFactory<>("HSL/TSL"));
 	}
+
+	private ObservableList<MyColorData> getColorList() {
+		ObservableList<MyColorData> listColors = FXCollections.observableArrayList();
+		for(Color color: saveColors){
+			MyColorData listColor = new MyColorData("      ", ConverterColor.color2Hex(color), ConverterColor.color2rgb(color), ConverterColor.color2tsl(color));
+			listColors.add(listColor);
+		}
+		System.out.println(listColors);
+		return listColors;
+	}
+
 
 	public void setDialogStage(Stage exportStage) {
 		this.exportStage = exportStage;
 	}
 
-	public void parseColor(ObservableList<Color> saveColors) {
-		String hex, rgb;
-		hex = "CSS    \n"+HR;
-		rgb = "RGB    \n"+HR;
-
-		for(Color color: saveColors){
-			hex += color2Hex(color)+"\n";
-			rgb += color2rgb(color)+"\n";
-		}
-		TextArea textArea = new TextArea();
-		textArea.setText(hex+BR+rgb);
-		textArea.setEditable(false);
-		textArea.prefWidthProperty().bind(zoneText.widthProperty());
-		textArea.prefHeightProperty().bind(zoneText.heightProperty());
-
-		zoneText.getChildren().add(textArea);
+	public void setColorData(ObservableList<Color> saveColors) {
+		this.saveColors = saveColors;
+		colorData = getColorList();
+		colorTable.setItems(colorData);
 	}
-
-	private String color2rgb(Color color) {
-		return "rgb("
-				+ (int) (color.getRed()*255)+","
-				+ (int) (color.getGreen()*255)+","
-				+ (int) (color.getBlue()*255)
-				+")";
-	}
-
-	private String color2Hex(Color color){
-		return  String.format( "#%02X%02X%02X",
-				(int)( color.getRed() * 255 ),
-				(int)( color.getGreen() * 255 ),
-				(int)( color.getBlue() * 255 ) );
-	}
-
 }

@@ -1,11 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
-
 
 <AnchorPane prefHeight="407.0" prefWidth="590.0" styleClass="background" stylesheets="@RGB2MC.css" xmlns="http://javafx.com/javafx/9" xmlns:fx="http://javafx.com/fxml/1" fx:controller="RGB2MC.ExportController">
    <children>
       <AnchorPane prefHeight="56.0" prefWidth="590.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-      <AnchorPane fx:id="zoneText" layoutX="10.0" layoutY="62.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="62.0" />
+      <AnchorPane fx:id="zoneTableau" layoutX="10.0" layoutY="62.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="62.0">
+         <children>
+            <TableView fx:id="colorTable" prefHeight="335.0" prefWidth="570.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+              <columns>
+                <TableColumn fx:id="nameCOlor" prefWidth="125.0" text="Couleur" />
+                <TableColumn fx:id="webColor" minWidth="0.0" prefWidth="118.0" text="Web" />
+                  <TableColumn fx:id="rgbColor" minWidth="0.0" prefWidth="164.0" text="RGB" />
+                  <TableColumn fx:id="tslColor" minWidth="0.0" prefWidth="162.0" text="HSL" />
+              </columns>
+            </TableView>
+         </children></AnchorPane>
    </children>
 </AnchorPane>

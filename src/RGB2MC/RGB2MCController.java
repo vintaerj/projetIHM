@@ -7,6 +7,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
@@ -15,6 +16,7 @@ import java.net.URL;
 import java.text.DecimalFormat;
 import java.text.ParsePosition;
 import java.util.*;
+
 
 public class RGB2MCController implements Initializable, ChangeListener, ListChangeListener {
 	private static final int NB_COLORS_MAX = 10;
@@ -60,29 +62,41 @@ public class RGB2MCController implements Initializable, ChangeListener, ListChan
 	private HBox viewGray;
 
 	@FXML
-	private Button exporter;
+	private Button deleteColor;
 
 	@FXML
-	private Button deleteColor;
+	private Button addColor;
+
+	@FXML
+	private AnchorPane zoneColors;
+
+	@FXML
+	private AnchorPane zoneGray;
+
+	@FXML
+	private Button exporter;
+
 
 	@FXML
 	void addNewColorFromEdit(ActionEvent event) {
 		if(listOfColors.size() < NB_COLORS_MAX && ! isColorAlreadyExist(colorPicker.getValue())) {
-			int nbRectAfterAdd = listOfColors.size() + 1;
-
 			Color colorFill = colorPicker.getValue();
+			if(!isColorAlreadyExist(ConverterColor.rgb2gray(colorFill))) {
+				int nbRectAfterAdd = listOfColors.size() + 1;
+				Rectangle rect;
 
-			Rectangle rect;
+				rect = new Rectangle(viewColors.getWidth() / nbRectAfterAdd, viewColors.getHeight(), colorFill);
+				viewColors.getChildren().add(rect);
+				listOfColors.add(rect);
 
-			rect = new Rectangle(viewColors.getWidth()/nbRectAfterAdd, viewColors.getHeight(), colorFill);
-			viewColors.getChildren().add(rect);
-			listOfColors.add(rect);
+				rect = new Rectangle(viewGray.getWidth() / nbRectAfterAdd, viewGray.getHeight(), ConverterColor.rgb2gray(colorFill));
+				viewGray.getChildren().add(rect);
+				listOfGray.add(rect);
 
-			rect = new Rectangle(viewGray.getWidth()/nbRectAfterAdd, viewGray.getHeight(), rgb2gray(colorFill));
-			viewGray.getChildren().add(rect);
-			listOfGray.add(rect);
-
-			saveColors.add(colorFill);
+				saveColors.add(colorFill);
+			}else{
+				showAlert("Une couleur ayant déjà le même niveau de gris existe !");
+			}
 		}else{
 			String msg = (listOfColors.size() >= NB_COLORS_MAX) ? "Nombre maximale de couleur atteint": "Cette couleur est déjà présente.";
 			showAlert(msg);
@@ -139,7 +153,7 @@ public class RGB2MCController implements Initializable, ChangeListener, ListChan
 		Color color = Color.rgb(r.intValue(), g.intValue(), b.intValue());
 
 		previewColor.setFill(color);
-		previewGray.setFill(rgb2gray(r,g,b));
+		previewGray.setFill(ConverterColor.rgb2gray(r,g,b));
 
 		textFiedRed.setTextFormatter(new TextFormatter<>(change -> controleInput(change)));
 		textFieldGreen.setTextFormatter(new TextFormatter<>(change -> controleInput(change)));
@@ -180,6 +194,14 @@ public class RGB2MCController implements Initializable, ChangeListener, ListChan
 
 	@Override
 	public void initialize(URL url, ResourceBundle resourceBundle) {
+		sliderRed.setStyle("-thumb-color: red;");
+		sliderGreen.setStyle("-thumb-color: green;");
+		sliderBlue.setStyle("-thumb-color: blue;");
+		deleteColor.setStyle(
+				"-fx-background-color: #ff0000;"
+				+ "-fx-color: white;"
+		);
+
 		sliderRed.valueProperty().addListener(this);
 		sliderGreen.valueProperty().addListener(this);
 		sliderBlue.valueProperty().addListener(this);
@@ -226,16 +248,6 @@ public class RGB2MCController implements Initializable, ChangeListener, ListChan
 	private boolean isColorAlreadyExist(Color color) {
 		return saveColors.contains(color);
 	}
-
-	private Color rgb2gray(Color value) {
-		return rgb2gray(value.getRed()*255, value.getGreen()*255, value.getBlue()*255);
-	}
-
-	private Color rgb2gray(Double r, Double g, Double b) {
-		//NiveauGris = 0.3   Rouge + 0.59   Vert + 0.11   Bleu
-		return Color.grayRgb((int)(0.3*r + 0.59*g + 0.11*b));
-	}
-
 
 	public void setMainApp(RGB2MCApp mainApp) {
 		this.mainApp = mainApp;

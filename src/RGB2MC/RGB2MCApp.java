@@ -37,7 +37,7 @@ public class RGB2MCApp extends Application {
 	private void initRootLayout() {
 		try {
 			FXMLLoader loader = new FXMLLoader();
-			loader.setLocation(getClass().getResource("RGB2MC/RGB2MC.fxml"));
+			loader.setLocation(getClass().getResource("/RGB2MC/RGB2MC.fxml"));
 			rootLayout = loader.load();
 
 			Scene scene = new Scene(rootLayout);
@@ -55,7 +55,7 @@ public class RGB2MCApp extends Application {
 	public void showExportDialog(ObservableList<Color> saveColors) {
 		try {
 			FXMLLoader loader = new FXMLLoader();
-			loader.setLocation(getClass().getResource("RGB2MC/RGB2MCExport.fxml"));
+			loader.setLocation(getClass().getResource("/RGB2MC/RGB2MCExport.fxml"));
 			AnchorPane page = loader.load();
 
 			Stage exportStage = new Stage();
@@ -68,7 +68,7 @@ public class RGB2MCApp extends Application {
 
 			ExportController controller = loader.getController();
 			controller.setDialogStage(exportStage);
-			controller.parseColor(saveColors);
+			controller.setColorData(saveColors);
 			exportStage.showAndWait();
 		} catch (IOException e) {
 			e.printStackTrace();
