@@ -76,7 +76,7 @@
       </AnchorPane>
       <AnchorPane layoutX="2.0" layoutY="130.0" prefHeight="55.0" prefWidth="212.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
          <children>
-            <ButtonBar layoutX="238.0" layoutY="8.0" prefHeight="40.0" prefWidth="200.0" AnchorPane.leftAnchor="238.0" AnchorPane.rightAnchor="262.0">
+            <ButtonBar fx:id="buttonBar" layoutX="238.0" layoutY="8.0" prefHeight="40.0" prefWidth="200.0" AnchorPane.leftAnchor="238.0" AnchorPane.rightAnchor="262.0">
               <buttons>
                   <Button fx:id="deleteColor" alignment="CENTER" cancelButton="true" mnemonicParsing="false" onAction="#deleteLastColor" text="-" />
                 <Button fx:id="addColor" alignment="CENTER" defaultButton="true" mnemonicParsing="false" onAction="#addNewColorFromEdit" text="+" />

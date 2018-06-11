@@ -7,6 +7,8 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.scene.input.MouseButton;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
@@ -20,7 +22,7 @@ import java.util.*;
 
 public class RGB2MCController implements Initializable, ChangeListener, ListChangeListener {
 	private static final int NB_COLORS_MAX = 10;
-	private static final double DELTA = 5.0;
+	private static final double DELTA = 0.0;
 
 	private RGB2MCApp mainApp;
 
@@ -30,6 +32,8 @@ public class RGB2MCController implements Initializable, ChangeListener, ListChan
 
 	private ObservableList<Color> verification = FXCollections.observableArrayList();
 
+	private Rectangle saveRec;
+	private Button buttonUpdate;
 
 	@FXML
 	private Slider sliderRed;
@@ -71,6 +75,9 @@ public class RGB2MCController implements Initializable, ChangeListener, ListChan
 	private Button addColor;
 
 	@FXML
+	private ButtonBar buttonBar;
+
+	@FXML
 	private AnchorPane zoneColors;
 
 	@FXML
@@ -89,6 +96,7 @@ public class RGB2MCController implements Initializable, ChangeListener, ListChan
 				Rectangle rect;
 
 				rect = new Rectangle(viewColors.getWidth() / nbRectAfterAdd, viewColors.getHeight(), colorFill);
+				rect.setOnMouseClicked(e-> handler(e));
 				viewColors.getChildren().add(rect);
 				listOfColors.add(rect);
 
@@ -104,6 +112,33 @@ public class RGB2MCController implements Initializable, ChangeListener, ListChan
 		}else{
 			String msg = (listOfColors.size() >= NB_COLORS_MAX) ? "Nombre maximale de couleur atteint": "Cette couleur est déjà présente.";
 			showAlert(msg);
+		}
+	}
+
+	private void handler(MouseEvent e) {
+		if(e.getButton().equals(MouseButton.PRIMARY) && buttonUpdate == null) {
+			System.out.println("click gauche");
+			saveRec = ((Rectangle) e.getSource());
+			Color c = (Color) (saveRec.getFill());
+			sliderRed.setValue(c.getRed()*255);
+			sliderGreen.setValue(c.getGreen()*255);
+			sliderBlue.setValue(c.getBlue()*255);
+			buttonUpdate = new Button("Up");
+			int index = listOfColors.indexOf(saveRec);
+			buttonUpdate.setOnMousePressed(event->updateColorFrom(event, index));
+			buttonBar.getButtons().add(buttonUpdate);
+		}else if(buttonUpdate != null && buttonBar.getButtons().size() > 2){
+			buttonBar.getButtons().remove(buttonBar.getButtons().size() -1);
+		}
+	}
+
+	private void updateColorFrom(MouseEvent e, int index) {
+		if(index != -1){
+			System.out.println(e.getSource()+ " i = "+index);
+			listOfColors.get(index).setFill(colorPicker.getValue());
+			listOfGray.get(index).setFill(ConverterColor.rgb2gray(colorPicker.getValue()));
+			buttonBar.getButtons().remove(buttonUpdate);
+			buttonUpdate = null;
 		}
 	}
 
