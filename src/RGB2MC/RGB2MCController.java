@@ -118,6 +118,7 @@ public class RGB2MCController implements Initializable, ChangeListener, ListChan
 	private void handler(MouseEvent e) {
 		if(e.getButton().equals(MouseButton.PRIMARY) && buttonUpdate == null) {
 			addColor.setVisible(false);
+			deleteColor.setVisible(false);
 			saveRec = ((Rectangle) e.getSource());
 			Color c = (Color) (saveRec.getFill());
 			sliderRed.setValue(c.getRed()*255);
@@ -148,6 +149,7 @@ public class RGB2MCController implements Initializable, ChangeListener, ListChan
 			buttonBar.getButtons().remove(buttonUpdate);
 			buttonUpdate = null;
 			addColor.setVisible(true);
+			deleteColor.setVisible(true);
 		}
 	}
 
