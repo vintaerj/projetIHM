@@ -79,6 +79,13 @@
     -fx-text-fill: white;
 }
 
+
+.update-button{
+    -fx-min-width: 200px;
+    -fx-background-color: #455e80;
+    -fx-text-fill: #fffdfb;
+}
+
 /*******************************************************************************
  *                                                                             *
  * Slider                                                                      *

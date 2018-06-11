@@ -124,7 +124,8 @@ public class RGB2MCController implements Initializable, ChangeListener, ListChan
 			sliderRed.setValue(c.getRed()*255);
 			sliderGreen.setValue(c.getGreen()*255);
 			sliderBlue.setValue(c.getBlue()*255);
-			buttonUpdate = new Button("Up");
+			buttonUpdate = new Button("Update");
+			buttonUpdate.getStyleClass().add("update-button");
 			int index = listOfColors.indexOf(saveRec);
 			listOfColors.get(index).setStroke(Color.BLACK);
 			listOfColors.get(index).setStrokeDashOffset(1);
