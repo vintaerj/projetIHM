@@ -117,7 +117,7 @@ public class RGB2MCController implements Initializable, ChangeListener, ListChan
 
 	private void handler(MouseEvent e) {
 		if(e.getButton().equals(MouseButton.PRIMARY) && buttonUpdate == null) {
-			System.out.println("click gauche");
+			addColor.setVisible(false);
 			saveRec = ((Rectangle) e.getSource());
 			Color c = (Color) (saveRec.getFill());
 			sliderRed.setValue(c.getRed()*255);
@@ -125,6 +125,8 @@ public class RGB2MCController implements Initializable, ChangeListener, ListChan
 			sliderBlue.setValue(c.getBlue()*255);
 			buttonUpdate = new Button("Up");
 			int index = listOfColors.indexOf(saveRec);
+			listOfColors.get(index).setStroke(Color.BLACK);
+			listOfColors.get(index).setStrokeDashOffset(1);
 			buttonUpdate.setOnMousePressed(event->updateColorFrom(event, index));
 			buttonBar.getButtons().add(buttonUpdate);
 		}else if(buttonUpdate != null && buttonBar.getButtons().size() > 2){
@@ -134,11 +136,13 @@ public class RGB2MCController implements Initializable, ChangeListener, ListChan
 
 	private void updateColorFrom(MouseEvent e, int index) {
 		if(index != -1){
-			System.out.println(e.getSource()+ " i = "+index);
 			listOfColors.get(index).setFill(colorPicker.getValue());
+			listOfColors.get(index).setStroke(Color.TRANSPARENT);
+			listOfColors.get(index).setStrokeWidth(0);
 			listOfGray.get(index).setFill(ConverterColor.rgb2gray(colorPicker.getValue()));
 			buttonBar.getButtons().remove(buttonUpdate);
 			buttonUpdate = null;
+			addColor.setVisible(true);
 		}
 	}
 
