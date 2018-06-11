@@ -136,10 +136,15 @@ public class RGB2MCController implements Initializable, ChangeListener, ListChan
 
 	private void updateColorFrom(MouseEvent e, int index) {
 		if(index != -1){
-			listOfColors.get(index).setFill(colorPicker.getValue());
+			verification.remove(index);
+			saveColors.remove(index);
+			Color colorFill = colorPicker.getValue();
+			listOfColors.get(index).setFill(colorFill);
 			listOfColors.get(index).setStroke(Color.TRANSPARENT);
 			listOfColors.get(index).setStrokeWidth(0);
-			listOfGray.get(index).setFill(ConverterColor.rgb2gray(colorPicker.getValue()));
+			listOfGray.get(index).setFill(ConverterColor.rgb2gray(colorFill));
+			verification.add(index, colorFill);
+			saveColors.add(index, new MyColorData(colorFill.toString(), ConverterColor.color2Hex(colorFill), ConverterColor.color2rgb(colorFill), ConverterColor.color2tsl(colorFill)));
 			buttonBar.getButtons().remove(buttonUpdate);
 			buttonUpdate = null;
 			addColor.setVisible(true);
